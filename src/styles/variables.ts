@@ -8,8 +8,8 @@ export const colors = {
 };
 
 export const fonts = {
-  base: "'DotGothic16', sans-serif",
-  heading: "'DotGothic16', sans-serif",
+  base: "'Noto Sans Japanese', sans-serif",
+  heading: "'Noto Sans Japanese', sans-serif",
 };
 
 export const fontSizes = {

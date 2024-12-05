@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { colors, fonts, fontSizes } from "../styles/variables";
-import { Form } from "../components/layout/Form";
+import { Form } from "../components/common/Form";
 import { List } from "../components/layout/List";
 import { useTasks } from "../hooks/useTasks";
 import { useDelete } from "../hooks/useDelete";
