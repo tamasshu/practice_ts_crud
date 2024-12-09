@@ -1,4 +1,4 @@
-import { Task } from "../types/Task";
+import { Task } from "../types/TaskProps";
 
 export const useDelete = (
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>

@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  @apply font-sans text-base font-medium leading-6 tracking-wide bg-lightBlue text-black;
+}
+
+ul {
+  @apply list-none;
+}

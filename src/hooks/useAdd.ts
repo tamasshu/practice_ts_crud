@@ -1,6 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { resolver } from "../utils/validation";
-import { Task } from "../types/Task";
+import { Task } from "../types/TaskProps";
 import { FormData } from "../types/FormData";
 import { getPokemonData } from "../utils/api/getPokemonData";
 

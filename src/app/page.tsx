@@ -1,46 +1,25 @@
 "use client";
 
-import styled from "styled-components";
-import { colors, fonts, fontSizes } from "../styles/variables";
-import { Form } from "../components/common/Form";
-import { List } from "../components/layout/List";
-import { useTasks } from "../hooks/useTasks";
+import { useState } from "react";
 import { useDelete } from "../hooks/useDelete";
 import { usePokemonList } from "../hooks/usePokemonList";
+import { Form } from "../components/common/Form";
+import { List } from "../components/layout/List";
+import { Task } from "../types/TaskProps";
 
 const Page: React.FC = () => {
-  const { tasks, setTasks } = useTasks();
+  const [tasks, setTasks] = useState<Task[]>([]);
   const deleteTask = useDelete(setTasks);
   const pokemonList = usePokemonList();
 
   return (
-    <PageContainer>
-      <Title>Pokemon Todo App</Title>
+    <div className="flex flex-col items-center gap-8 max-w-2xl mx-auto p-16">
+      <h1 className="text-heading font-bold mb-2">Pokemon Todo App</h1>
       <Form setTasks={setTasks} pokemonOptions={pokemonList} />
-      <Border />
+      <div className="w-full border-b border-white"></div>
       <List tasks={tasks} deleteTask={deleteTask} />
-    </PageContainer>
+    </div>
   );
 };
 
 export default Page;
-
-const PageContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  max-width: 32rem;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-`;
-
-const Title = styled.h1`
-  font-family: ${fonts.heading};
-  font-size: ${fontSizes.heading};
-`;
-
-const Border = styled.div`
-  width: 100%;
-  border-bottom: 1px solid ${colors.white};
-`;

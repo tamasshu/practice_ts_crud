@@ -8,18 +8,36 @@ type PokemonData = {
   image: string;
 };
 
+type SpeciesData = {
+  names: { language: { name: string }; name: string }[];
+};
+
 export const getPokemonData = async (
   pokemonId: number
 ): Promise<PokemonData> => {
   const url = `${BASE_API_URL}/pokemon/${pokemonId}`;
-  const pokemonData = await fetchAPI(url);
-
   const speciesUrl = `${BASE_API_URL}/pokemon-species/${pokemonId}`;
-  const speciesData = await fetchAPI(speciesUrl);
 
-  const nameEntry = speciesData.names.find(
-    (entry: { language: { name: string }; name: string }) =>
-      entry.language.name === "ja"
+  const pokemonResponse = await fetchAPI(url);
+  const pokemonData = pokemonResponse.data;
+
+  if (!pokemonResponse.ifFetch) {
+    throw new Error(
+      pokemonResponse.error || "ポケモンデータの取得に失敗しました"
+    );
+  }
+
+  const speciesResponse = await fetchAPI(speciesUrl);
+  const speciesData: SpeciesData = speciesResponse.data;
+
+  if (!speciesResponse.ifFetch) {
+    throw new Error(
+      speciesResponse.error || "ポケモンの種族データの取得に失敗しました"
+    );
+  }
+
+  const nameEntry = speciesData.names?.find(
+    (entry) => entry.language.name === "ja"
   );
 
   return {
