@@ -40,6 +40,28 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
       </div>
 
       <div className="mb-4">
+        <Select
+          {...register("priority")}
+          options={[
+            { value: "low", label: "低" },
+            { value: "medium", label: "中" },
+            { value: "high", label: "高" },
+          ]}
+          name="priority"
+          placeholder="優先度を選択"
+          className="w-full px-3 py-2 border rounded"
+        />
+      </div>
+
+      <div className="mb-4">
+        <Input
+          {...register("deadline")}
+          type="date"
+          className="w-full px-3 py-2 border rounded"
+        />
+      </div>
+
+      <div className="mb-4">
         <Button type="submit" variant="submit">
           追加
         </Button>

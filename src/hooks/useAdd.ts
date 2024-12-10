@@ -23,6 +23,8 @@ export const useAdd = (
       title: task.title,
       assignedPokemon: pokemonData.name,
       assignedPokemonImage: pokemonData.image,
+      priority: task.priority,
+      deadline: task.deadline,
     };
 
     setTasks((prevTasks) => [...prevTasks, newTask]);

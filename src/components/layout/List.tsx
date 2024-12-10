@@ -23,6 +23,10 @@ export const List: React.FC<TaskProps> = ({ tasks, deleteTask }) => {
             )}
           </div>
           <h3 className="text-lg font-bold mb-2">{task.title}</h3>
+          <div className="mb-2">
+            <p>優先度：{task.priority}</p>
+            <p>締切日：{task.deadline}</p>
+          </div>
           <Button onClick={() => deleteTask(task.id)} variant="delete">
             削除
           </Button>
