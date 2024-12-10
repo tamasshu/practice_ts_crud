@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { GlobalStyle } from "../styles/base";
+import "../styles/base.css";
 
 export const metadata: Metadata = {
   title: "Pokemon Todo App",
@@ -14,10 +14,7 @@ type RootLayoutProps = {
 const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="ja">
-      <body>
-        <GlobalStyle />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 };

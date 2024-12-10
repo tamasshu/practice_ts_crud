@@ -1,9 +1,18 @@
 export const fetchAPI = async (url: string) => {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(
-      `HTTPエラー: ${response.status} - ${response.statusText} - URL: ${url}`
-    );
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return {
+      data,
+      ifFetch: true,
+    };
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "エラーが発生しました";
+    return {
+      data: null,
+      error: errorMessage,
+      ifFetch: false,
+    };
   }
-  return response.json();
 };

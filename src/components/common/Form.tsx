@@ -1,5 +1,3 @@
-import { colors, fontSizes } from "../../styles/variables";
-import styled from "styled-components";
 import { FormProps } from "../../types/FormProps";
 import { Input } from "../common/Input";
 import { Select } from "../common/Select";
@@ -10,49 +8,42 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
   const { register, handleSubmit, errors, onSubmit } = useAdd(setTasks);
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <FormContents>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="w-full p-4 bg-white rounded shadow-md"
+    >
+      <div className="mb-4">
         <Input
           {...register("title")}
           type="text"
           placeholder="タスク名を入力"
+          className="w-full px-3 py-2 border rounded"
         />
+        {errors.title && (
+          <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+        )}
+      </div>
 
+      <div className="mb-4">
         <Select
           {...register("assignedPokemon")}
           options={pokemonOptions}
           name="assignedPokemon"
           placeholder="担当ポケモンを選択"
+          className="w-full px-3 py-2 border rounded"
         />
+        {errors.assignedPokemon && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.assignedPokemon.message}
+          </p>
+        )}
+      </div>
 
+      <div className="mb-4">
         <Button type="submit" variant="submit">
           追加
         </Button>
-      </FormContents>
-
-      {errors.title && <Error>{errors.title.message}</Error>}
-      {errors.assignedPokemon && (
-        <Error>{errors.assignedPokemon.message}</Error>
-      )}
-    </StyledForm>
+      </div>
+    </form>
   );
 };
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-`;
-
-const FormContents = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  width: 100%;
-`;
-
-const Error = styled.p`
-  color: ${colors.pink};
-  font-size: ${fontSizes.small};
-  font-weight: 500;
-`;

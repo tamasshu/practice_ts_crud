@@ -1,62 +1,33 @@
-import { colors, fontSizes } from "../../styles/variables";
-import styled from "styled-components";
-import { ListProps } from "../../types/ListProps";
+import Image from "next/image";
+import { TaskProps } from "../../types/TaskProps";
 import { Button } from "../common/Button";
 
-export const List: React.FC<ListProps> = ({ tasks, deleteTask }) => {
+export const List: React.FC<TaskProps> = ({ tasks, deleteTask }) => {
   return (
-    <ListContainer>
+    <ul className="grid grid-cols-2 gap-2 w-full">
       {tasks.map((task) => (
-        <ListItemContainer key={task.id}>
-          <AssignedPokemon>
-            {task.assignedPokemon}
-            <PokemonImage
-              src={task.assignedPokemonImage}
-              alt={task.assignedPokemon}
-            />
-          </AssignedPokemon>
-          <Title>{task.title}</Title>
+        <li
+          key={task.id}
+          className="flex flex-col justify-between items-center p-4 bg-white rounded shadow-md"
+        >
+          <div className="mb-2">
+            <p className="text-center mb-2">{task.assignedPokemon}</p>
+            {task.assignedPokemonImage && (
+              <Image
+                src={task.assignedPokemonImage}
+                alt={task.assignedPokemon}
+                width={80}
+                height={80}
+                className="w-40 h-40"
+              />
+            )}
+          </div>
+          <h3 className="text-lg font-bold mb-2">{task.title}</h3>
           <Button onClick={() => deleteTask(task.id)} variant="delete">
             削除
           </Button>
-        </ListItemContainer>
+        </li>
       ))}
-    </ListContainer>
+    </ul>
   );
 };
-
-const ListContainer = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
-  width: 100%;
-`;
-
-const ListItemContainer = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.6rem 0.8rem;
-  background-color: ${colors.white};
-  border-radius: 0.4rem;
-`;
-
-const Title = styled.span`
-  font-weight: 700;
-`;
-
-const AssignedPokemon = styled.span`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: ${fontSizes.small};
-`;
-
-const PokemonImage = styled.img`
-  width: 5rem;
-  height: 5rem;
-  object-fit: cover;
-`;

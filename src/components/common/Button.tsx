@@ -1,6 +1,3 @@
-import styled from "styled-components";
-import { colors } from "../../styles/variables";
-
 type ButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
@@ -14,29 +11,20 @@ export const Button: React.FC<ButtonProps> = ({
   variant = "submit",
   type = "button",
 }) => {
+  const baseClasses =
+    "px-4 py-2 text-white font-bold tracking-wide whitespace-nowrap border-none rounded transition duration-300 ease-in-out";
+  const variantClasses =
+    variant === "submit"
+      ? "bg-black hover:bg-blackHover"
+      : "bg-pink hover:bg-pinkHover w-full";
+
   return (
-    <StyledButton type={type} onClick={onClick} variant={variant}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={`${baseClasses} ${variantClasses}`}
+    >
       {children}
-    </StyledButton>
+    </button>
   );
 };
-
-const StyledButton = styled.button<ButtonProps>`
-  padding: 0.4rem 0.6rem;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  white-space: nowrap;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  color: ${colors.white};
-
-  width: ${({ variant }) => (variant === "delete" ? "100%" : "auto")};
-  background-color: ${({ variant }) =>
-    variant === "submit" ? `${colors.black}` : `${colors.pink}`};
-
-  &:hover {
-    background-color: ${({ variant }) =>
-      variant === "submit" ? `${colors.blackHover}` : `${colors.pinkHover}`};
-  }
-`;
