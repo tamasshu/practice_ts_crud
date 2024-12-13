@@ -10,14 +10,7 @@ type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (
-    {
-      value,
-      onChange,
-      name = "",
-      options,
-      placeholder = "",
-      className,
-    },
+    { value, onChange, name = "", options, placeholder = "", className },
     ref
   ) => {
     return (
@@ -26,7 +19,7 @@ export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
         onChange={onChange}
         name={name}
         ref={ref}
-        className={`w-full px-3 py-2 border rounded focus:border-lightBlue focus:outline-none ${className}`}
+        className={`w-full px-3 py-2 border rounded focus:border-lightGreen focus:outline-none ${className}`}
       >
         {placeholder && <option value="">{placeholder}</option>}
         {options.map((option) => (

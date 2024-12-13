@@ -24,22 +24,15 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="flex gap-2">
         <Select
           {...register("assignedPokemon")}
           options={pokemonOptions}
           name="assignedPokemon"
-          placeholder="担当ポケモンを選択"
+          placeholder="担当ポケモン"
           className="w-full px-3 py-2 border rounded"
         />
-        {errors.assignedPokemon && (
-          <p className="text-red-500 text-sm mt-1">
-            {errors.assignedPokemon.message}
-          </p>
-        )}
-      </div>
 
-      <div className="mb-4">
         <Select
           {...register("priority")}
           options={[
@@ -48,12 +41,10 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
             { value: "high", label: "高" },
           ]}
           name="priority"
-          placeholder="優先度を選択"
+          placeholder="優先度"
           className="w-full px-3 py-2 border rounded"
         />
-      </div>
 
-      <div className="mb-4">
         <Input
           {...register("deadline")}
           type="date"
@@ -61,7 +52,19 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
         />
       </div>
 
-      <div className="mb-4">
+      {errors.assignedPokemon && (
+        <p className="text-red-500 text-sm mt-1">
+          {errors.assignedPokemon.message}
+        </p>
+      )}
+      {errors.priority && (
+        <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>
+      )}
+      {errors.deadline && (
+        <p className="text-red-500 text-sm mt-1">{errors.deadline.message}</p>
+      )}
+
+      <div className="flex justify-end w-full mt-4">
         <Button type="submit" variant="submit">
           追加
         </Button>
