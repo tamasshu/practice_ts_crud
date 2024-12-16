@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { Task } from "../types/TaskProps";
+import { TaskType } from "../types/TaskType";
 
 type UseSortReturnType = [
   (sortType: string) => void,
-  (tasks: Task[]) => Task[]
+  (tasks: TaskType[]) => TaskType[]
 ];
 
 export const useSort = (): UseSortReturnType => {
   const [sortType, setSortType] = useState<string>("");
 
-  const sortTasks = (tasks: Task[]): Task[] => {
+  const sortTasks = (tasks: TaskType[]): TaskType[] => {
     if (!Array.isArray(tasks)) return [];
 
     return [...tasks].sort((a, b) => {

@@ -1,16 +1,22 @@
 import { useState } from "react";
-import { TaskProps, Task } from "../types/TaskProps";
+import { TaskType } from "../types/TaskType";
+import { SetTasksType } from "../types/SetTasksType";
 
-export const useEdit = ({ tasks, setTasks }: TaskProps) => {
+type EditPropsType = {
+  tasks: TaskType[];
+  setTasks: SetTasksType;
+};
+
+export const useEdit = ({ tasks, setTasks }: EditPropsType) => {
   const [editTaskId, setEditTaskId] = useState<number | null>(null);
-  const [editedTask, setEditedTask] = useState<Partial<Task>>({});
+  const [editedTask, setEditedTask] = useState<Partial<TaskType>>({});
 
-  const handleEdit = (task: Task) => {
+  const handleEdit = (task: TaskType) => {
     setEditTaskId(task.id);
     setEditedTask({ ...task });
   };
 
-  const handleChange = (field: keyof Task, value: any) => {
+  const handleChange = (field: string, value: string) => {
     setEditedTask((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -30,11 +36,15 @@ export const useEdit = ({ tasks, setTasks }: TaskProps) => {
   };
 
   return {
-    editTaskId,
-    editedTask,
-    handleEdit,
-    handleChange,
-    handleUpdate,
-    handleCancel,
+    editTask: {
+      id: editTaskId,
+      data: editedTask,
+    },
+    actions: {
+      handleEdit,
+      handleChange,
+      handleUpdate,
+      handleCancel,
+    },
   };
 };

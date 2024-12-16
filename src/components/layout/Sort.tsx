@@ -1,14 +1,15 @@
-import { Task } from "../../types/TaskProps";
-import { Select } from "../common/Select";
+import { SetTasksType } from "../../types/SetTasksType";
+import { TaskType } from "../../types/TaskType";
+import { Select } from "../common/UIComponents";
 
-type SortProps = {
-  tasks: Task[];
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+type SortPropsType = {
+  tasks: TaskType[];
+  setTasks: SetTasksType;
   setSortType: (sortType: string) => void;
-  sortTasks: (tasks: Task[]) => Task[];
+  sortTasks: (tasks: TaskType[]) => TaskType[];
 };
 
-export const Sort: React.FC<SortProps> = ({
+export const Sort: React.FC<SortPropsType> = ({
   tasks,
   setTasks,
   setSortType,

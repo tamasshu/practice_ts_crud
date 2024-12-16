@@ -1,29 +1,29 @@
 import Image from "next/image";
-import { Task } from "../../types/TaskProps";
-import { Button } from "../common/Button";
-import { priorityMap } from "../../types/JapanesePriority";
-import { Input } from "../common/Input";
-import { Select } from "../common/Select";
+import { TaskType } from "../../types/TaskType";
+import { priorityMap } from "../../constants/priorityMap";
+import { priorityOptions } from "../../constants/priorityOptions";
+import { Input, Select, Button } from "../common/UIComponents";
 
-type EditProps = {
-  tasks: Task[];
-  editTaskId: number | null;
-  editedTask: Partial<Task>;
-  handleEdit: (task: Task) => void;
-  handleChange: (field: keyof Task, value: any) => void;
-  handleUpdate: () => void;
-  handleCancel: () => void;
-  openModal: (task: Task) => void;
+type EditPropsType = {
+  tasks: TaskType[];
+  deleteTask: (id: TaskType["id"]) => void;
+  editTask: {
+    id: TaskType["id"] | null;
+    data: Partial<TaskType>;
+  };
+  actions: {
+    handleEdit: (task: TaskType) => void;
+    handleChange: (field: string, value: string) => void;
+    handleUpdate: () => void;
+    handleCancel: () => void;
+  };
+  openModal: (task: TaskType) => void;
 };
 
-export const List: React.FC<EditProps> = ({
+export const List: React.FC<EditPropsType> = ({
   tasks,
-  editTaskId,
-  editedTask,
-  handleEdit,
-  handleChange,
-  handleUpdate,
-  handleCancel,
+  editTask,
+  actions,
   openModal,
 }) => {
   return (
@@ -46,31 +46,39 @@ export const List: React.FC<EditProps> = ({
             )}
           </div>
           <h3 className="text-lg font-bold mb-3">{task.title}</h3>
-          {editTaskId === task.id ? (
+          {editTask.id === task.id ? (
             <>
               <div className="flex flex-col gap-2">
                 <Select
-                  options={[
-                    { value: "low", label: "低" },
-                    { value: "medium", label: "中" },
-                    { value: "high", label: "高" },
-                  ]}
+                  options={priorityOptions}
                   name="priority"
-                  value={editedTask.priority}
-                  onChange={(e) => handleChange("priority", e.target.value)}
+                  value={editTask.data.priority}
+                  onChange={(e) =>
+                    actions.handleChange("priority", e.target.value)
+                  }
                   className="w-full px-3 py-2 border rounded"
                 />
                 <Input
                   name="deadline"
                   type="date"
-                  value={editedTask.deadline}
-                  onChange={(e) => handleChange("deadline", e.target.value)}
+                  value={editTask.data.deadline}
+                  onChange={(e) =>
+                    actions.handleChange("deadline", e.target.value)
+                  }
                   className="w-full px-3 py-2 border rounded"
                 />
-                <Button onClick={handleUpdate} variant="edit">
+                <Button
+                  onClick={actions.handleUpdate}
+                  type="button"
+                  variant="edit"
+                >
                   更新
                 </Button>
-                <Button onClick={handleCancel} variant="cancel">
+                <Button
+                  onClick={actions.handleCancel}
+                  type="button"
+                  variant="cancel"
+                >
                   キャンセル
                 </Button>
               </div>
@@ -83,10 +91,18 @@ export const List: React.FC<EditProps> = ({
               </div>
 
               <div className="flex flex-col w-full gap-2">
-                <Button onClick={() => handleEdit(task)} variant="edit">
+                <Button
+                  onClick={() => actions.handleEdit(task)}
+                  type="button"
+                  variant="edit"
+                >
                   編集
                 </Button>
-                <Button onClick={() => openModal(task)} variant="delete">
+                <Button
+                  onClick={() => openModal(task)}
+                  type="button"
+                  variant="delete"
+                >
                   削除
                 </Button>
               </div>

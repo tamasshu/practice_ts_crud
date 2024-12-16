@@ -1,9 +1,8 @@
-import { Task } from "../types/TaskProps";
+import { SetTasksType } from "../types/SetTasksType";
+import { TaskType } from "../types/TaskType";
 
-export const useDelete = (
-  setTasks: React.Dispatch<React.SetStateAction<Task[]>>
-) => {
-  const deleteTask = (id: number) => {
+export const useDelete = (setTasks: SetTasksType) => {
+  const deleteTask = (id: TaskType["id"]) => {
     setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
   };
 

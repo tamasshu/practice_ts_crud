@@ -1,11 +1,49 @@
-import { FormProps } from "../../types/FormProps";
-import { Input } from "../common/Input";
-import { Select } from "../common/Select";
-import { Button } from "../common/Button";
-import { useAdd } from "../../hooks/useAdd";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { resolver } from "../../utils/validation";
+import { getPokemonData } from "../../utils/api/getPokemonData";
+import { SetTasksType } from "../../types/SetTasksType";
+import { OptionType } from "../../types/OptionType";
+import { TaskType } from "../../types/TaskType";
+import { priorityOptions } from "../../constants/priorityOptions";
+import { Input, Select, Button } from "../common/UIComponents";
 
-export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
-  const { register, handleSubmit, errors, onSubmit } = useAdd(setTasks);
+type FormPropsType = {
+  pokemonOptions: OptionType;
+  setTasks: SetTasksType;
+};
+
+type FormDataType = {
+  title: string;
+  assignedPokemon: string;
+  priority: string;
+  deadline: string;
+};
+
+export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<FormDataType>({
+    resolver: resolver,
+  });
+
+  const onSubmit: SubmitHandler<FormDataType> = async (task) => {
+    const pokemonData = await getPokemonData(Number(task.assignedPokemon));
+    const newTask: TaskType = {
+      id: Date.now(),
+      title: task.title,
+      assignedPokemon: pokemonData.name,
+      assignedPokemonImage: pokemonData.image,
+      priority: task.priority,
+      deadline: task.deadline,
+    };
+
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+
+    reset();
+  };
 
   return (
     <form
@@ -35,11 +73,7 @@ export const Form: React.FC<FormProps> = ({ pokemonOptions, setTasks }) => {
 
         <Select
           {...register("priority")}
-          options={[
-            { value: "low", label: "低" },
-            { value: "medium", label: "中" },
-            { value: "high", label: "高" },
-          ]}
+          options={priorityOptions}
           name="priority"
           placeholder="優先度"
           className="w-full px-3 py-2 border rounded"
