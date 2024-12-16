@@ -1,8 +1,13 @@
 import Image from "next/image";
-import { TaskProps } from "../../types/TaskProps";
-import { Button } from "../common/Button";
+import { TaskType } from "../../types/TaskType";
+import { Button } from "../common/UIComponents";
 
-export const List: React.FC<TaskProps> = ({ tasks, deleteTask }) => {
+type ListPropsType = {
+  tasks: TaskType[];
+  deleteTask: (id: TaskType["id"]) => void;
+};
+
+export const List: React.FC<ListPropsType> = ({ tasks, deleteTask }) => {
   return (
     <ul className="grid grid-cols-2 gap-2 w-full">
       {tasks.map((task) => (
@@ -23,7 +28,11 @@ export const List: React.FC<TaskProps> = ({ tasks, deleteTask }) => {
             )}
           </div>
           <h3 className="text-lg font-bold mb-2">{task.title}</h3>
-          <Button onClick={() => deleteTask(task.id)} variant="delete">
+          <Button
+            onClick={() => deleteTask(task.id)}
+            type="button"
+            variant="delete"
+          >
             削除
           </Button>
         </li>

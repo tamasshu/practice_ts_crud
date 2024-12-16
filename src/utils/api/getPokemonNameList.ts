@@ -3,20 +3,19 @@ import { getPokemonData } from "./getPokemonData";
 
 const BASE_API_URL = "https://pokeapi.co/api/v2";
 
-type PokemonNameList = {
+type PokemonNameType = {
   value: string;
   label: string;
 };
 
-type PokemonListResponse = {
+type PokemonListDataType = {
   results: { name: string; url: string }[];
 };
 
-export const getPokemonNameList = async (): Promise<PokemonNameList[]> => {
+export const getPokemonNameList = async (): Promise<PokemonNameType[]> => {
   const url = `${BASE_API_URL}/pokemon?limit=100`;
-
   const response = await fetchAPI(url);
-  const data: PokemonListResponse = response.data;
+  const data: PokemonListDataType = response.data;
 
   if (!response.ifFetch) {
     throw new Error(response.error || "ポケモンリストの取得に失敗しました");
