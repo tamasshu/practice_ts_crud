@@ -6,12 +6,12 @@ import { OptionType } from "../../types/OptionType";
 import { TaskType } from "../../types/TaskType";
 import { Button, Input, Select } from "./UIComponents";
 
-export type FormPropsType = {
+type FormPropsType = {
   pokemonOptions: OptionType;
   setTasks: SetTasksType;
 };
 
-export type FormDataType = {
+type FormDataType = {
   title: string;
   assignedPokemon: string;
 };
