@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { TaskType } from "../types/TaskType";
-import { SetTasksType } from "../types/SetTasksType";
+import { TaskListType } from "../types/TaskListType";
 
-type EditPropsType = {
-  tasks: TaskType[];
-  setTasks: SetTasksType;
-};
-
-export const useEdit = ({ tasks, setTasks }: EditPropsType) => {
+export const useEdit = ({ tasks, setTasks }: TaskListType) => {
   const [editTaskId, setEditTaskId] = useState<number | null>(null);
   const [editedTask, setEditedTask] = useState<Partial<TaskType>>({});
 

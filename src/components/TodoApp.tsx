@@ -4,11 +4,10 @@ import { useState } from "react";
 import { useDelete } from "../hooks/useDelete";
 import { usePokemonList } from "../hooks/usePokemonList";
 import { useEdit } from "../hooks/useEdit";
-import { useSort } from "../hooks/useSort";
 import { useModal } from "../hooks/useModal";
 import { Form } from "../components/common/Form";
 import { Modal } from "../components/common/Modal";
-import { Sort } from "../components/layout/Sort";
+import { Sort } from "./common/Sort";
 import { List } from "../components/layout/List";
 import { TaskType } from "../types/TaskType";
 
@@ -16,7 +15,6 @@ export const TodoApp: React.FC = () => {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   const deleteTask = useDelete(setTasks);
   const pokemonList = usePokemonList();
-  const [setSortType, sortTasks] = useSort();
   const { editTask, actions } = useEdit({ tasks, setTasks });
   const { task, openModal, closeModal } = useModal();
 
@@ -32,12 +30,7 @@ export const TodoApp: React.FC = () => {
       <h1 className="text-heading font-bold mb-2">Pokemon Todo App</h1>
       <Form setTasks={setTasks} pokemonOptions={pokemonList} />
       <div className="w-full border-b border-white"></div>
-      <Sort
-        tasks={tasks}
-        setTasks={setTasks}
-        setSortType={setSortType}
-        sortTasks={sortTasks}
-      />
+      <Sort tasks={tasks} setTasks={setTasks} />
       <List
         tasks={tasks}
         deleteTask={deleteTask}
