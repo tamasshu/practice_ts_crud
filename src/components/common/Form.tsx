@@ -62,7 +62,7 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
         )}
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex flex-col">
         <Select
           {...register("assignedPokemon")}
           options={pokemonOptions}
@@ -93,11 +93,6 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
         />
       </div>
 
-      {errors.assignedPokemon && (
-        <p className="text-red-500 text-sm mt-1">
-          {errors.assignedPokemon.message}
-        </p>
-      )}
       {errors.priority && (
         <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>
       )}
