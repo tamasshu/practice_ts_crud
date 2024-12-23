@@ -23,7 +23,7 @@ type ButtonPropsType = {
   children: React.ReactNode;
   onClick?: () => void;
   type: "button" | "submit";
-  variant: "submit" | "delete";
+  variant: "submit" | "delete" | "edit" | "update" | "cancel";
 };
 
 export const Input = React.forwardRef<HTMLInputElement, InputPropsType>(
@@ -90,8 +90,14 @@ export const Button: React.FC<ButtonPropsType> = ({
     "px-4 py-2 text-white font-bold tracking-wide whitespace-nowrap border-none rounded transition duration-300 ease-in-out";
   const variantClasses =
     variant === "submit"
-      ? "bg-black hover:bg-blackHover"
-      : "bg-pink hover:bg-pinkHover w-full";
+      ? "bg-darkBlue hover:bg-darkBlueHover"
+      : variant === "delete"
+      ? "bg-orange hover:bg-orangeHover w-full"
+      : variant === "edit"
+      ? "text-darkBlue bg-yellow hover:bg-yellowHover w-full"
+      : variant === "update"
+      ? "bg-yellow hover:bg-yellowHover"
+      : "bg-gray-500 hover:bg-gray-600";
 
   return (
     <button

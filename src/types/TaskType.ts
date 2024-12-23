@@ -3,4 +3,6 @@ export type TaskType = {
   title: string;
   assignedPokemon: string;
   assignedPokemonImage?: string;
+  priority: string;
+  deadline: string;
 };

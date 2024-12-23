@@ -4,7 +4,8 @@ import { getPokemonData } from "../../utils/api/getPokemonData";
 import { SetTasksType } from "../../types/SetTasksType";
 import { OptionType } from "../../types/OptionType";
 import { TaskType } from "../../types/TaskType";
-import { Button, Input, Select } from "./UIComponents";
+import { priorityOptions } from "../../constants/priorityOptions";
+import { Input, Select, Button } from "../common/UIComponents";
 
 type FormPropsType = {
   pokemonOptions: OptionType;
@@ -14,6 +15,8 @@ type FormPropsType = {
 type FormDataType = {
   title: string;
   assignedPokemon: string;
+  priority: string;
+  deadline: string;
 };
 
 export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
@@ -33,6 +36,8 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
       title: task.title,
       assignedPokemon: pokemonData.name,
       assignedPokemonImage: pokemonData.image,
+      priority: task.priority,
+      deadline: task.deadline,
     };
 
     setTasks((prevTasks) => [...prevTasks, newTask]);
@@ -57,12 +62,12 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="flex flex-col">
         <Select
           {...register("assignedPokemon")}
           options={pokemonOptions}
           name="assignedPokemon"
-          placeholder="担当ポケモンを選択"
+          placeholder="担当ポケモン"
           className="w-full px-3 py-2 border rounded"
         />
         {errors.assignedPokemon && (
@@ -72,7 +77,30 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
         )}
       </div>
 
-      <div className="mb-4">
+      <div className="flex gap-2 mt-4">
+        <Select
+          {...register("priority")}
+          options={priorityOptions}
+          name="priority"
+          placeholder="優先度"
+          className="w-full px-3 py-2 border rounded"
+        />
+
+        <Input
+          {...register("deadline")}
+          type="date"
+          className="w-full px-3 py-2 border rounded"
+        />
+      </div>
+
+      {errors.priority && (
+        <p className="text-red-500 text-sm mt-1">{errors.priority.message}</p>
+      )}
+      {errors.deadline && (
+        <p className="text-red-500 text-sm mt-1">{errors.deadline.message}</p>
+      )}
+
+      <div className="flex justify-end w-full mt-4">
         <Button type="submit" variant="submit">
           追加
         </Button>

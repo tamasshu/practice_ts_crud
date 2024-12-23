@@ -3,11 +3,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        black: "#241915",
-        blackHover: "#1D1410",
-        lightBlue: "#52A5AD",
-        pink: "#D9526A",
-        pinkHover: "#C0485F",
+        darkBlue: "#343E69",
+        darkBlueHover: "#5B6D9D",
+        lightGreen: "#C7DC9F",
+        lightGreenHover: "#A5C1A5",
+        orange: "#DD5217",
+        orangeHover: "#F2A365",
+        yellow: "#F5DA79",
+        yellowHover: "#F7E9A3",
         white: "#FFFFFF",
       },
       fontFamily: {

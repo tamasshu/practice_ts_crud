@@ -9,7 +9,7 @@
 }
 
 body {
-  @apply font-sans text-base font-medium leading-6 tracking-wide bg-lightBlue text-black;
+  @apply font-sans text-base font-medium leading-6 tracking-wide bg-lightGreen text-darkBlue;
 }
 
 ul {
