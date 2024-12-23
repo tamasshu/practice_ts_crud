@@ -70,7 +70,14 @@ export const Form: React.FC<FormPropsType> = ({ pokemonOptions, setTasks }) => {
           placeholder="担当ポケモン"
           className="w-full px-3 py-2 border rounded"
         />
+        {errors.assignedPokemon && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors.assignedPokemon.message}
+          </p>
+        )}
+      </div>
 
+      <div className="flex gap-2 mt-4">
         <Select
           {...register("priority")}
           options={priorityOptions}

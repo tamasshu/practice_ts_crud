@@ -7,11 +7,11 @@ export const metadata: Metadata = {
     "TypeScriptとReactを使用したNext.jsアプリです。ポケモンがタスクを担当します。",
 };
 
-type RootLayoutProps = {
+type RootLayoutPropsType = {
   children: React.ReactNode;
 };
 
-const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+const RootLayout: React.FC<RootLayoutPropsType> = ({ children }) => {
   return (
     <html lang="ja">
       <body>{children}</body>

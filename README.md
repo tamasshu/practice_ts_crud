@@ -4,7 +4,6 @@
 
 node.js: 20.10.0
 Next.js: 14.2.18
-styled-components
 
 ### インストール手順
 
