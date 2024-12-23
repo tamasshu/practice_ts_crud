@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../styles/base.css";
 
 export const metadata: Metadata = {
-  title: "TSとReactを使ったNext.jsアプリ",
-  description: "TypeScriptとReactを使ったNext.jsアプリケーション",
+  title: "Pokemon Todo App",
+  description:
+    "TypeScriptとReactを使用したNext.jsアプリです。ポケモンがタスクを担当します。",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutPropsType = {
   children: React.ReactNode;
-}>) {
+};
+
+const RootLayout: React.FC<RootLayoutPropsType> = ({ children }) => {
   return (
     <html lang="ja">
       <body>{children}</body>
     </html>
   );
-}
+};
+
+export default RootLayout;
